@@ -7,8 +7,6 @@ RUN apt-get update && apt-get install -y  tar wget curl pwgen jq
 RUN wget https://github.com/PIVX-Project/PIVX/releases/download/v5.3.2.1/pivx-5.3.2.1-x86_64-linux-gnu.tar.gz -P /tmp
 RUN tar xzvf /tmp/pivx-5.3.2.1-x86_64-linux-gnu.tar.gz -C /tmp \
 && cp /tmp/pivx-5.3.2.1/bin/* /usr/local/bin
-RUN chmod 755 /tmp/pivx-5.3.2.1/install-params.sh
-CMD ./tmp/pivx-5.3.2.1/install-params.sh
 COPY node_initialize.sh /node_initialize.sh
 COPY check-health.sh /check-health.sh
 VOLUME /root/.pivx
