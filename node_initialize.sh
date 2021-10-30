@@ -14,7 +14,10 @@ function get_ip() {
 }
 
 if [[ ! -d /root/.pivx-params ]]; then
-./tmp/pivx-5.3.2.1/install-params.sh
+cd /tmp/pivx-5.3.2.1
+bash install-params.sh
+cd
+sleep 10
 fi
 
 get_ip
