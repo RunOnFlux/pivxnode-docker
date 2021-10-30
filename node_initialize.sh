@@ -36,6 +36,7 @@ rpcallowip=127.0.0.1
 server=1
 daemon=1
 masternode=1
+logtimestamps=1
 externalip=$WANIP
 masternodeaddr=$WANIP:51472
 masternodeprivkey=$KEY
