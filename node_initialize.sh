@@ -43,6 +43,6 @@ maxconnections=256
 EOF
 
 while true; do
-pivxd
+pivxd -daemon
 sleep 60
 done
