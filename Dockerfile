@@ -1,6 +1,7 @@
 
 ARG UBUNTUVER=20.04
 FROM ubuntu:${UBUNTUVER}
+LABEL com.centurylinklabs.watchtower.enable="true"
 
 RUN mkdir -p /root/.pivx
 RUN apt-get update && apt-get install -y  tar wget curl pwgen jq
