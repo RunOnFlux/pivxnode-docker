@@ -1,28 +1,25 @@
 #!/usr/bin/env bash
 
 function get_ip() {
-
     WANIP=$(curl --silent -m 15 https://api4.my-ip.io/ip | tr -dc '[:alnum:].')
-
-    if [[ "$WANIP" == "" ]]; then
-      WANIP=$(curl --silent -m 15 https://checkip.amazonaws.com | tr -dc '[:alnum:].')
-    fi
-
-    if [[ "$WANIP" == "" ]]; then
-      WANIP=$(curl --silent -m 15 https://api.ipify.org | tr -dc '[:alnum:].')
+    if [[ "$WANIP" == "" || "$WANIP" = *htmlhead* ]]; then
+        WANIP=$(curl --silent -m 15 https://checkip.amazonaws.com | tr -dc '[:alnum:].')    
+    fi  
+    if [[ "$WANIP" == "" || "$WANIP" = *htmlhead* ]]; then
+        WANIP=$(curl --silent -m 15 https://api.ipify.org | tr -dc '[:alnum:].')
     fi
 }
 
-if [[ ! -d /root/.pivx-params ]]; then
-cd /tmp/pivx-5.3.2.1
-bash install-params.sh
-cd
-sleep 10
-fi
-
 get_ip
-RPCUSER=$(pwgen -1 8 -n)
+RPCUSER=$(pwgen -1 18 -n)
 PASSWORD=$(pwgen -1 20 -n)
+
+if [[ ! -d /root/.pivx-params ]]; then
+  cd /usr/local/bin
+  bash install-params.sh
+  sleep 5
+  cd
+fi
 
 if [[ -f /root/.pivx/pivx.conf ]]; then
   rm  /root/.pivx/pivx.conf
@@ -44,6 +41,9 @@ maxconnections=256
 EOF
 
 while true; do
-pivxd -daemon
-sleep 60
+ if [[ $(pgrep pivxd) == "" ]]; then 
+   echo -e "Starting daemon..."
+   pivxd -daemon
+ fi
+ sleep 120
 done
