@@ -14,5 +14,5 @@ COPY key.sh /key.sh
 VOLUME /root/.pivx
 RUN chmod 755 node_initialize.sh check-health.sh key.sh
 EXPOSE 51472
-HEALTHCHECK --start-period=5m --interval=2m --retries=5 --timeout=15s CMD ./check-health.sh
+HEALTHCHECK --start-period=5m --interval=5m --retries=5 --timeout=15s CMD ./check-health.sh
 CMD ./node_initialize.sh
