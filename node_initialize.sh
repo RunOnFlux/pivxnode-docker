@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
-
+CONFIG_FILE="/root/.pivx/pivx.conf"
 url_array=(
     "https://api4.my-ip.io/ip"
     "https://checkip.amazonaws.com"
     "https://api.ipify.org"
 )
-CONFIG_FILE="/root/.pivx/pivx.conf"
 
 function get_ip() {
     for url in "$@"; do
