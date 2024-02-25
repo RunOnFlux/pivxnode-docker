@@ -2,7 +2,7 @@
 ARG UBUNTUVER=20.04
 FROM ubuntu:${UBUNTUVER}
 LABEL com.centurylinklabs.watchtower.enable="true"
-ENV VERSION="5.5.0"
+ENV VERSION="5.6.1"
 RUN mkdir -p /root/.pivx
 RUN apt-get update && apt-get install -y  tar wget curl pwgen jq nano
 RUN wget https://github.com/PIVX-Project/PIVX/releases/download/v${VERSION}/pivx-${VERSION}-x86_64-linux-gnu.tar.gz -P /tmp
